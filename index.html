@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+	class App extends React.Component {
+		constructor(props) {
+			super(props)
+		}
+
+		compositionstart(event) {
+			console.log('开始输入', event.data);
+		}
+
+		compositionupdate(event) {
+			console.log('正在输入的数据', event.data);
+		}
+
+		compositionend(event) {
+			console.log('结束输入', event.data);
+		}
+
+		changeEvent() {
+			console.log('改变');
+		}
+
+		render() {
+			return (
+              <div>
+                  <input type="text" id="test" onChange={this.changeEvent.bind(this)}
+                         onCompositionStart={this.compositionstart.bind(this)}
+                         onCompositionUpdate={this.compositionupdate.bind(this)}
+                         onCompositionEnd={this.compositionend.bind(this)}/>
+              </div>
+			)
+		}
+	}
+	window.onload = function () {
+		ReactDOM.render(
+            <App/>,
+			document.getElementById('root')
+		)
+	}
+</script>
+</body>
+</html>
